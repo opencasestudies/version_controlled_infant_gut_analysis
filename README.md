@@ -10,8 +10,12 @@ Data citation: Wang, S., Zeng, S., Egan, M., Cherry, P., Strain, C., Morais, E.,
 
 This repo is organized as follows:
 
-- raw data: 
-  - meta_analysis_metadata.xlsx: Sample metadata, available as file "Table S1.xlsx" in the [Supplementary Information](https://www.tandfonline.com/action/downloadSupplement?doi=10.1080%2F19490976.2021.1911571&file=kgmi_a_1911571_sm8722.zip&__cf_chl_tk=DEof_mHrRsIvA3N7tqoxMQaEPKs1rFG8PWbjQqhDJcY-1771529206-1.0.1.1-r9ilfrtjQlW1cGewP6YMASIyLseZ0a51kWPS09ggMbg) of the Wang et al. paper 
+- 01_pull_study_data.R: script to read in data from "raw_data/Table S1.xlsx" and create a single data table in "processed_data/sample_metadata.rda"
+- 02_wrangle_data.R: script to wrangle data from "processed_data/sample_metadata.Rda" to fix mistakes, remove invalid observations, and make data easier to work with, creates "processed_data/clean_sample_metadata.Rda"
+- raw_data: 
+  - Table S1.xlsx: Supplementary information from [Wang et al.](https://www.tandfonline.com/doi/full/10.1080/19490976.2021.1911571?scroll=top&needAccess=true#abstract), included as part of a [.zip file](https://www.tandfonline.com/action/downloadSupplement?doi=10.1080%2F19490976.2021.1911571&file=kgmi_a_1911571_sm8722.zip)
 - processed_data: 
-  - sample_metadata.csv: A clean version of "meta_analysis_metadata.xlsx", saved as a single data frame 
-  - sequencing_metadata.csv: Sequencing metadata, pulled from the ENA Portal [API](https://www.ebi.ac.uk/ena/portal/api/search) in script "01-pull-sequencing-data.R"
+  - sample_metadata.rda: table with data about samples from each original study included in the meta-analysis of Wang et al., generated in "01_pull_study_data.R"
+  - clean_sample_metadata.rda: table with cleaned data about samples from each original study, generated in "02_wrangle_data.R"
+- figures:
+- results: 
