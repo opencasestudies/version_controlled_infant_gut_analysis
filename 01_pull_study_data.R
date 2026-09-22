@@ -6,8 +6,8 @@ study_data <- lapply(3:10, function(i) {
   read_xlsx("raw_data/Table S1.xlsx", sheet = i)
 }) 
 
-# set all variables to be characters in order to combine data across studies
-# original data had encoded same variable in different formats across studies
+# set all variables as characters in order to combine data across studies
+# original data had some variables in different data types across studies
 study_data_clean <- lapply(study_data, function(df) {
   df %>% mutate(across(everything(), as.character))
 })
