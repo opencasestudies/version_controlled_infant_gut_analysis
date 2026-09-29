@@ -7,15 +7,15 @@ load("processed_data/sample_metadata.rda")
 # clean data
 clean_metadata <- sample_metadata %>%
   # remove all rows in data that are missing sample ID
-  filter(!is.na(SampleID)) %>% 
+  dplyr::filter(!is.na(SampleID)) %>% 
   # clean study name to only include last name of first author
   mutate(Study = 
            # remove _year from study name
-           str_remove(Study, "\\_.*") %>% 
+           stringr::str_remove(Study, "\\_.*") %>% 
            # remove first name initial from study name
-           str_remove_all("(?<=.)[A-Z]")) %>% 
+           stringr::str_remove_all("(?<=.)[A-Z]")) %>% 
   # remove spaces from names of variables 
-  rename(sampling_paper = `Sampling from papers`, 
+  dplyr::rename(sampling_paper = `Sampling from papers`, 
          sampling_day = `Sampling, day`) %>%
   # make sampling_day a numeric variable
   mutate(sampling_day = as.numeric(sampling_day)) 
@@ -24,7 +24,7 @@ clean_metadata <- sample_metadata %>%
 # first inspect this to confirm
 clean_metadata %>%
   filter(Study == "Yassour") %>%
-  select(Study, Category, SampleID, sampling_day) %>%
+  dplyr::select(Study, Category, SampleID, sampling_day) %>%
   head()
 
 # create new unique sample IDs for Yassour study
@@ -53,7 +53,7 @@ ids_before_birth <- clean_metadata %>%
          Study == "Parnanen" & sampling_paper == "32WK" |
            Study == "Yassour" & sampling_paper == "Gest") %>%
   # get sample ids for these samples
-  pull(SampleID) 
+  dplyr::pull(SampleID) 
 clean_metadata <- clean_metadata %>%
   # add `sampling_before_birth` variable, and set to TRUE
   # for these specific samples we identified 
